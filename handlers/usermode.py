@@ -118,4 +118,4 @@ async def unsupported_types(message: Message, l10n: FluentLocalization):
             ContentType.MESSAGE_AUTO_DELETE_TIMER_CHANGED, ContentType.NEW_CHAT_PHOTO, ContentType.DELETE_CHAT_PHOTO,
             ContentType.SUCCESSFUL_PAYMENT, "proximity_alert_triggered",  # в 3.0.0b3 нет поддержки этого контент-тайпа
             ContentType.NEW_CHAT_TITLE, ContentType.PINNED_MESSAGE):
-        await message.reply(l10n.format_value("Не правильный формат сообщения!"))
+        await message.reply(l10n.format_value("Не правильный формат сообщения!")) 
