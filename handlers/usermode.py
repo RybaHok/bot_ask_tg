@@ -40,7 +40,7 @@ https://bio.site/deymyanrina
 
 async def _send_expiring_notification(message: Message, l10n: FluentLocalization):
     """
-    Отправляет "самоуничтожающееся" через 3 секунд сообщение
+    Отправляет "самоуничтожающееся" через 3 секунды сообщение
 
     :param message: сообщение, на которое бот отвечает подтверждением отправки
     :param l10n: объект локализации
