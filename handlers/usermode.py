@@ -6,7 +6,7 @@ from aiogram.types import ContentType, Message
 from fluent.runtime import FluentLocalization
 
 
-from blocklist import banned, shadowbanned
+from blocklist import banned
 from config_reader import config
 from filters import SupportedMediaFilter
 
@@ -76,7 +76,7 @@ async def cmd_help(message: Message, l10n: FluentLocalization):
 @router.message(Command(commands=["about"]))
 async def cmd_about(message: Message, l10n: FluentLocalization):
     """
-    сообщение от бота пользователю контакты
+    Cообщение от бота пользователю контакты
 
     :param message: сообщение от пользователя с командой /контакты
     :param l10n: объект локализации
@@ -96,7 +96,6 @@ async def text_message(message: Message, bot: Bot, l10n: FluentLocalization):
         return await message.reply(l10n.format_value("Слишком длинный текст максимум 4000 символов"))
     if message.from_user.id in banned:
         await message.answer(l10n.format_value("Вы заблокированы!"))
-    elif message.from_user.id in shadowbanned:
         return
     else:
         await bot.send_message(
@@ -107,7 +106,7 @@ async def text_message(message: Message, bot: Bot, l10n: FluentLocalization):
 
 
 @router.message(SupportedMediaFilter())
-async def supported_media(message: Message, bot: Bot, l10n: FluentLocalization):
+async def supported_media(message: Message,  l10n: FluentLocalization):
     """
     Хэндлер на медиафайлы от пользователя.
     Поддерживаются только типы, к которым можно добавить подпись (полный список см. в регистраторе внизу)
@@ -119,7 +118,6 @@ async def supported_media(message: Message, bot: Bot, l10n: FluentLocalization):
         return await message.reply(l10n.format_value("Слишком большой файл"))
     if message.from_user.id in banned:
         await message.answer(l10n.format_value("Вы заблокированы!"))
-    elif message.from_user.id in shadowbanned:
         return
     else:
         await message.copy_to(
@@ -146,10 +144,3 @@ async def unsupported_types(message: Message, l10n: FluentLocalization):
             ContentType.SUCCESSFUL_PAYMENT, "proximity_alert_triggered",  # в 3.0.0b3 нет поддержки этого контент-тайпа
             ContentType.NEW_CHAT_TITLE, ContentType.PINNED_MESSAGE):
         await message.reply(l10n.format_value("Не правильный формат сообщения!"))
-
-
-
-
-
-
-

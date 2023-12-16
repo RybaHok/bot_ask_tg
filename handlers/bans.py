@@ -5,7 +5,7 @@ from aiogram.filters import Command
 from aiogram.types import Message
 from fluent.runtime import FluentLocalization
 
-from blocklist import banned, shadowbanned
+from blocklist import banned
 from config_reader import config
 from handlers.adminmode import extract_id
 
@@ -49,7 +49,7 @@ async def cmd_unban(message: Message, l10n: FluentLocalization):
 
 @router.message(Command(commands=["list_banned"]))
 async def cmd_list_banned(message: Message, l10n: FluentLocalization):
-    has_bans = len(banned) > 0 or len(shadowbanned) > 0
+    has_bans = len(banned) > 0
     if not has_bans:
         await message.answer(l10n.format_value("Не заблокирован"))
         return
